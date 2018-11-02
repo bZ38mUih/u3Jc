@@ -1,0 +1,73 @@
+﻿<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="Win-PC-Info" Height="490" Width="718" Loaded="Window_Loaded" ResizeMode="NoResize">
+    <Grid Width="690" Height="445
+          ">
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="60" Margin="5" Stroke="Black" VerticalAlignment="Top" Width="340" Grid.Column="0" Grid.ColumnSpan="5"/>
+        <Label Content="Options:" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Height="26" Width="55" Grid.ColumnSpan="3"/>
+        <CheckBox x:Name="optEnvironment" Content="Environment" HorizontalAlignment="Left" Margin="80,15,0,0" VerticalAlignment="Top" Height="15" Width="90" Grid.ColumnSpan="4"/>
+        <CheckBox x:Name="optHardware" Content="Hardware" HorizontalAlignment="Left" Margin="80,38,0,0" VerticalAlignment="Top" Height="15" Width="90" Grid.ColumnSpan="4"/>
+        <CheckBox x:Name="optProcess" Content="Process" HorizontalAlignment="Left" Margin="200,15,0,0" VerticalAlignment="Top" Height="15" Width="90" Grid.Column="3"/>
+        <CheckBox x:Name="optServices" Content="Services" HorizontalAlignment="Left" Margin="200,38,0,0" VerticalAlignment="Top" Height="15" Width="90" Grid.Column="3"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="60" Margin="350,5,0,0" Stroke="Black" VerticalAlignment="Top" Width="340" Grid.Column="4"/>
+        <Label Content="Actions:" HorizontalAlignment="Left" Margin="350,5,0,0" VerticalAlignment="Top" Grid.Column="4" Height="26" Width="52"/>
+        <Button Content="Get" HorizontalAlignment="Left" Margin="380,30,0,0" VerticalAlignment="Top" Width="44" Click="Get_Click" Grid.Column="4" Height="20"/>
+        <TextBox x:Name="expName" HorizontalAlignment="Left" TextAlignment="Right" Height="23" Margin="445,28,0,0" TextWrapping="Wrap" Text="exp1" VerticalAlignment="Top" Width="60" Grid.Column="4"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="510,30,0,0" VerticalAlignment="Top" Width="44" Click="Save_Click" Grid.Column="4" Height="20"/>
+        <Button Content="Load" HorizontalAlignment="Left" Margin="600,30,0,0" VerticalAlignment="Top" Width="44" Click="Load_Click" Grid.Column="4" Height="20"/>
+        <TabControl HorizontalAlignment="Left" Height="430" Margin="5 70 0 0" VerticalAlignment="Top" Width="685" Grid.ColumnSpan="5">
+            <TabItem Header="EnvVar" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
+                <DataGrid x:Name="envVar_dg" CanUserAddRows="True" HorizontalAlignment="Left" Height="400" Width="680" Margin="0,0,0,0" VerticalAlignment="Top" SelectionChanged="DataGrid_SelectionChanged" FontSize="16" Grid.ColumnSpan="3" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="varName" Binding="{Binding Path=vName}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="200"/>
+                        <DataGridTextColumn Header="varVal" Binding="{Binding Path=vVal}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="450"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Hardware" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54">
+                <DataGrid x:Name="hardware_dg" CanUserAddRows="True" HorizontalAlignment="Left" Height="390" Width="680" Margin="0,0,0,0" VerticalAlignment="Top" SelectionChanged="DataGrid_SelectionChanged" FontSize="16" Grid.ColumnSpan="3" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="paramName" Binding="{Binding Path=paramName}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="200"/>
+                        <DataGridTextColumn Header="paramVal" Binding="{Binding Path=paramVal}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="450"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Process" Margin="0,0">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="77*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="525*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="Process_dg" CanUserAddRows="True" HorizontalAlignment="Left" Height="390" Margin="0,0,0,0" VerticalAlignment="Top" Width="515" SelectionChanged="DataGrid_SelectionChanged" FontSize="16" Grid.ColumnSpan="3" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="pName" Binding="{Binding Path=pName}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="130"/>
+                            <DataGridTextColumn Header="PID" Binding="{Binding Path=PID}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="70"/>
+                            <DataGridTextColumn Header="pPath" Binding="{Binding Path=pPath}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="230"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Services">
+                <DataGrid x:Name="Services_dg" CanUserAddRows="True" HorizontalAlignment="Left" Height="390" Margin="0,0,0,0" VerticalAlignment="Top" Width="515" SelectionChanged="DataGrid_SelectionChanged" FontSize="16" Grid.ColumnSpan="3" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="sName" Binding="{Binding Path=sName}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="130" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="sDName" Binding="{Binding Path=sDName}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="70" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="sSTName" Binding="{Binding Path=sSTName}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="230" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="sDescr" Binding="{Binding Path=sDescr}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="230" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="sPath" Binding="{Binding Path=sPath}" ClipboardContentBinding="{x:Null}" FontSize="16" Width="230" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+        </TabControl>
+        
+    </Grid>
+</Window>
